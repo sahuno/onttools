@@ -135,12 +135,19 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python 3.12
+# Install Python 3.12
 RUN add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt-get install -y python3.12 python3-pip && \
+    apt-get install -y python3.12 python3.12-dev python3-pip && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1 && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1 && \
     rm -rf /var/lib/apt/lists/*
+#RUN add-apt-repository ppa:deadsnakes/ppa && \
+#    apt-get update && \
+#    apt-get install -y python3.12 python3-pip && \
+#    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1 && \
+#    update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1 && \
+#    rm -rf /var/lib/apt/lists/*
 
 # Install pip for Python 3.12
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
@@ -167,13 +174,20 @@ RUN wget https://cdn.oxfordnanoportal.com/software/analysis/dorado-1.0.1-linux-x
 RUN pip3 install pod5
 
 # Install modkit
-RUN cargo install modkit
+#RUN cargo install modkit
+RUN cargo install --git https://github.com/nanoporetech/modkit.git
 
 # Install longphase
-RUN wget https://github.com/twolinin/longphase/releases/download/v1.7.3/longphase_linux-x64.tar.gz && \
-    tar -xzf longphase_linux-x64.tar.gz && \
-    mv longphase_linux-x64/longphase /usr/local/bin/ && \
-    rm -rf longphase*
+# Install longphase
+RUN wget https://github.com/twolinin/longphase/releases/download/v1.7.3/longphase_linux-x64.tar.xz && \
+    tar -xJf longphase_linux-x64.tar.xz && \
+    mv longphase_linux-x64 /usr/local/bin/longphase && \
+    chmod +x /usr/local/bin/longphase && \
+    rm -rf longphase_linux-x64.tar.xz
+#RUN wget https://github.com/twolinin/longphase/releases/download/v1.7.3/longphase_linux-x64.tar.xz && \
+#    tar -xJf longphase_linux-x64.tar.xz && \
+#    mv longphase_linux-x64/longphase /usr/local/bin/ && \
+#    rm -rf longphase*
 
 # Install whatshap
 RUN pip3 install whatshap
@@ -196,7 +210,7 @@ RUN pip3 install igv-reports
 # Copy requirements file, test script, and example analysis script
 COPY requirements.txt /opt/requirements.txt
 COPY test_installation.sh /usr/local/bin/test_installation
-COPY example_methylation_analysis.py /opt/example_methylation_analysis.py
+#COPY example_methylation_analysis.py /opt/example_methylation_analysis.py
 RUN chmod +x /usr/local/bin/test_installation
 
 # Install Python packages
