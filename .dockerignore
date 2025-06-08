@@ -1,0 +1,43 @@
+# Git files
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Data files
+*.bam
+*.sam
+*.vcf
+*.bed
+*.fastq
+*.fq
+*.gz
+*.pod5
+*.fast5
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Build artifacts
+*.sif
+*.img

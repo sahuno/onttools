@@ -1,0 +1,19 @@
+# Core scientific computing
+numpy>=1.26.0
+pandas>=2.2.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Bioinformatics packages
+pysam>=0.22.0
+cyvcf2>=0.30.0
+
+# Configuration and utilities
+pyyaml>=6.0
+packaging>=23.0
+
+# Additional dependencies that may be required
+scipy>=1.12.0
+scikit-learn>=1.4.0
+plotly>=5.18.0
+biopython>=1.83
