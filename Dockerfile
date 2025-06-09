@@ -54,6 +54,9 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # Create working directory
 WORKDIR /opt
 
+#RUN cargo install modkit; do this now rather than in final stage.
+RUN cargo install --git https://github.com/nanoporetech/modkit.git
+
 # Install samtools, bcftools, htslib
 RUN wget https://github.com/samtools/samtools/releases/download/1.22/samtools-1.22.tar.bz2 && \
     tar -xjf samtools-1.22.tar.bz2 && \
@@ -154,11 +157,14 @@ RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 
 # Copy from builder
 COPY --from=builder /usr/local /usr/local
-COPY --from=builder /root/.cargo /root/.cargo
+#COPY --from=builder /root/.cargo /root/.cargo
 COPY --from=builder /opt/Sniffles /opt/Sniffles
+COPY --from=builder /root/.cargo/bin/modkit /usr/local/bin/
 
+# Quick sanity-check: make sure modkit is on PATH; tricky & it misses many times
+RUN modkit --version
 # Install Rust (required for runtime)
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+#RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 WORKDIR /opt
 
@@ -175,7 +181,7 @@ RUN pip3 install pod5
 
 # Install modkit
 #RUN cargo install modkit
-RUN cargo install --git https://github.com/nanoporetech/modkit.git
+#RUN cargo install --git https://github.com/nanoporetech/modkit.git
 
 # Install longphase
 # Install longphase
