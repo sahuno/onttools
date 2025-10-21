@@ -219,10 +219,9 @@ RUN chmod +x /usr/local/bin/test_installation
 # Install Python packages
 RUN pip3 install --break-system-packages -r /opt/requirements.txt
 
-# Clean up - COMMENTED OUT due to libstdc++ conflict with Dorado libraries
-# See LIBSTDC_FIX.md for details
-# RUN apt-get clean && \
-#     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Create working directory for analysis
 RUN mkdir -p /data /results
