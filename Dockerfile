@@ -169,10 +169,10 @@ RUN modkit --version
 WORKDIR /opt
 
 # Install dorado (latest version)
-RUN wget https://cdn.oxfordnanoportal.com/software/analysis/dorado-1.0.1-linux-x64.tar.gz && \
-    tar -xzf dorado-1.0.1-linux-x64.tar.gz && \
-    mv dorado-1.0.1-linux-x64/bin/* /usr/local/bin/ && \
-    mv dorado-1.0.1-linux-x64/lib/* /usr/local/lib/ && \
+RUN wget https://cdn.oxfordnanoportal.com/software/analysis/dorado-1.2.0-linux-x64.tar.gz && \
+    tar -xzf dorado-1.2.0-linux-x64.tar.gz && \
+    mv dorado-1.2.0-linux-x64/bin/* /usr/local/bin/ && \
+    mv dorado-1.2.0-linux-x64/lib/* /usr/local/lib/ && \
     rm -rf dorado* && \
     ldconfig
 
